@@ -1,4 +1,5 @@
 <?php
+
 use spi\SpiDirectPayment;
 use spi\SpiMessage;
 

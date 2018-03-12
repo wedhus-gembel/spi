@@ -1,5 +1,7 @@
 <?php
 
+use spi\Spi;
+use spi\SpiMessage;
 
 require_once "spi/Spi.php";
 require_once "spi/SpiMessage.php";
@@ -81,6 +83,16 @@ $message = $message->getMessage();
             font-size: 20px;
             font-weight: bold;
         }
+        .bordered {
+            border: 2px solid #337ab7;
+            border-radius: 15px;
+            padding: 10px;
+            min-height: 125px;
+            margin-bottom: 5px;
+        }
+        .spi-img label {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -135,7 +147,7 @@ $message = $message->getMessage();
                             <?php
                                 foreach ($group as $row) {
                                     ?>
-                                    <div class="col-sm-3 text-center">
+                                    <div class="col-sm-3 text-center bordered">
                                         <input type="radio" name="pay_url" value="<?= $row['payment_url']?>">
                                         <div class="spi-img">
                                             <img src="<?= $row['payment_logo']?>">

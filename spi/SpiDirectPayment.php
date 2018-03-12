@@ -8,6 +8,11 @@
 
 namespace spi;
 
+
+use Spi;
+use SpiMessage;
+use SpiHelper;
+
 require "Spi.php";
 require "SpiMessage.php";
 require "SpiHelper.php";
