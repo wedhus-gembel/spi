@@ -1,7 +1,7 @@
 <?php
 /**
  * Description of SpiHelper<br>
- * This class to make life easier and happier while use and validate SPI json request.<br>
+ * Class helper, to support another function.<br>
  * @author Zainul Alim <za.mi213@gmail.com>
  */
 namespace spi;

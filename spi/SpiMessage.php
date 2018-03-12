@@ -4,7 +4,7 @@ namespace spi;
 
 /**
  * Description of SC SPI Message Request<br>
- * This class to make life easier and happier while use and validate SPI json request.<br>
+ * Class for make redirect request.<br>
  * @author Reza Ishaq M <rezaishaqm@gmail.com>
  */
 class SpiMessage {

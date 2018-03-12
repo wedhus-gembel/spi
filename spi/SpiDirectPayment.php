@@ -2,7 +2,7 @@
 
 /**
  * Description of SpiDirectPayment<br>
- * This class to make life easier and happier while use and validate SPI json request.<br>
+ * Class for make direct request.<br>
  * @author Zainul Alim <za.mi213@gmail.com>
  */
 

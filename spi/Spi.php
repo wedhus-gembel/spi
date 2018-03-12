@@ -3,7 +3,7 @@
 namespace spi;
 /**
  * Description of Spi<br>
- * This class to make life easier and happier while use and validate SPI json request.<br>
+ * Main class for initialize.<br>
  * @author Zainul Alim <za.mi213@gmail.com>
  */
 class Spi {
