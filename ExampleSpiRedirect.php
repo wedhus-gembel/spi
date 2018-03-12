@@ -1,8 +1,5 @@
 <?php
 
-use spi\Spi;
-use spi\SpiMessage;
-
 require_once "spi/Spi.php";
 require_once "spi/SpiMessage.php";
 

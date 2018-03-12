@@ -1,12 +1,11 @@
 <?php
 
-namespace spi;
-
 /**
  * Description of SC SPI Message Request<br>
  * Class for make redirect request.<br>
  * @author Reza Ishaq M <rezaishaqm@gmail.com>
  */
+
 class SpiMessage {
 
     var $_bases_model = array(

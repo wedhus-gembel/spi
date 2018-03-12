@@ -1,10 +1,10 @@
 <?php
+
 /**
  * Description of SpiHelper<br>
  * Class helper, to support another function.<br>
  * @author Zainul Alim <za.mi213@gmail.com>
  */
-namespace spi;
 
 Class SpiHelper {
 

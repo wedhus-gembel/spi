@@ -6,16 +6,9 @@
  * @author Zainul Alim <za.mi213@gmail.com>
  */
 
-namespace spi;
-
-
-use Spi;
-use SpiMessage;
-use SpiHelper;
-
-require "Spi.php";
-require "SpiMessage.php";
-require "SpiHelper.php";
+require_once "Spi.php";
+require_once "SpiMessage.php";
+require_once "SpiHelper.php";
 
 class SpiDirectPayment extends Spi {
 	var $spiMessage;

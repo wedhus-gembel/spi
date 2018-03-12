@@ -1,11 +1,11 @@
 <?php
 
-namespace spi;
 /**
  * Description of Spi<br>
  * Main class for SPI API.<br>
  * @author Zainul Alim <za.mi213@gmail.com>
  */
+
 class Spi {
 	
 	var $PRIVATE_KEY1 = "";
