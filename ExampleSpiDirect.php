@@ -4,8 +4,8 @@ require_once "spi/SpiDirectPayment.php";
 require_once "spi/SpiMessage.php";
 
 
-$username = '17b5da84c564f5728801e87e1c3b7ab9';
-$password = '482d7d45cc88947a0fe038fc1b79dcb8';
+$username = 'plasamall';
+$password = 'plasamall';
 
 
 $Spi = new SpiDirectPayment();
