@@ -1,7 +1,11 @@
 <?php
 
 namespace spi;
-
+/**
+ * Description of Spi<br>
+ * This class to make life easier and happier while use and validate SPI json request.<br>
+ * @author Zainul Alim <za.mi213@gmail.com>
+ */
 class Spi {
 	
 	var $PRIVATE_KEY1 = "";
