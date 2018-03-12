@@ -3,7 +3,7 @@
 namespace spi;
 /**
  * Description of Spi<br>
- * Main class for initialize.<br>
+ * Main class for SPI API.<br>
  * @author Zainul Alim <za.mi213@gmail.com>
  */
 class Spi {
