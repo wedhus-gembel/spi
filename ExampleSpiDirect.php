@@ -89,6 +89,7 @@ $Spi->setMessageFromJson($message);
 // set payment method, 
 $Spi->setPaymentMethod("indomaret");
 /**
+* List of products:
 finpay_code => Finnet Payment Code
 bri         => BRI Mocash
 tcash       => Telkomsel Cash
@@ -101,5 +102,6 @@ cimbpc      => ATM 137 Online
 indomaret   => Indomaret
 alfamart    => Alfamart
 **/
+
 $result = $Spi->doPay();
 die($result);
