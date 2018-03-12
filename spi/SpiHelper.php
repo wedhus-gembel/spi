@@ -1,5 +1,7 @@
 <?php
 
+namespace spi;
+
 Class SpiHelper {
 
 	public static function encrypt($text, $key) {

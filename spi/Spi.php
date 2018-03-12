@@ -1,5 +1,7 @@
 <?php
 
+namespace spi;
+
 class Spi {
 	
 	var $PRIVATE_KEY1 = "";

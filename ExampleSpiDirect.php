@@ -1,4 +1,7 @@
 <?php
+use spi\SpiDirectPayment;
+use spi\SpiMessage;
+
 require_once "spi/SpiDirectPayment.php";
 require_once "spi/SpiMessage.php";
 

@@ -1,5 +1,7 @@
 <?php
 
+namespace spi;
+
 /**
  * Description of SC SPI Message Request<br>
  * This class to make life easier and happier while use and validate SPI json request.<br>
@@ -234,7 +236,7 @@ class SpiMessage {
                 }
             }
         }else{
-            throw new Exception('Not Authorized, Failed format message!');
+            throw new \Exception('Not Authorized, Failed format message!');
         }
     }
     

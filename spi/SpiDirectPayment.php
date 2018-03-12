@@ -1,5 +1,7 @@
 <?php
 
+namespace spi;
+
 require "Spi.php";
 require "SpiMessage.php";
 require "SpiHelper.php";
