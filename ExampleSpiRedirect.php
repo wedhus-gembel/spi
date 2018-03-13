@@ -55,135 +55,141 @@ $message = $message->getMessage();
 <head>
     <title>SPI Testing</title>
     <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SpeedCash Online Payment Gateway Indonesia - Sistem pembayaran online untuk bisnis online, belanja online dan Rekber Rekening Bersama">
+    <meta name="keywords" content="sistem pembayaran,pembayaran online,bisnis online,belanja online,payment gateway indonesia">
+    <meta name="tag-name" content="pembayaran online,bisnis online,payment gateway indonesia"/>
+    <meta name="author" content="SpeedCash">
+
+    <link rel="shortcut icon" href="https://www.speedcash.co.id/favicon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style type="text/css">
-        img {
-            max-width: 120px;
-        }
-        .bayar {
-            margin-top: 37px;
-            width: 100%;
-            font-size: 30px;
-        }
-        body {
-            background: #eee;
-        }
-        .container {
-            margin-top: 50px;
-            background: #fff;
-            padding: 40px;
-        }
-        a > span {
-            font-size: 20px;
-            font-weight: bold;
-        }
-        .bordered {
-            padding: 10px;
-            min-height: 125px;
-            margin-bottom: 5px;
-            border: 1px solid #e6e1e1;
-            display: inline-flex;
-            border-radius: 7px;
-        }
-        .spi-img span {
-            display: block;
-        }
-        .bordered.active {
-            background: #0094dc;
-            color: #fff;
-        }
-        .bordered.active img {
-            background: #fff;
-            border: 1px solid #eee;
-            border-radius: 5px;
-        }
-    </style>
+    img {
+        max-width: 120px;
+    }
+    .bayar {
+        margin-top: 37px;
+        width: 100%;
+        font-size: 30px;
+    }
+    body {
+        background: #eee;
+    }
+    .container {
+        margin-top: 50px;
+        background: #fff;
+        padding: 40px;
+    }
+    a > span {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .bordered {
+        padding: 10px;
+        min-height: 125px;
+        margin-bottom: 5px;
+        border: 1px solid #e6e1e1;
+        display: inline-flex;
+        border-radius: 7px;
+    }
+    .spi-img span {
+        display: block;
+    }
+    .bordered.active {
+        background: #0094dc;
+        color: #fff;
+    }
+    .bordered.active img {
+        background: #fff;
+        border: 1px solid #eee;
+        border-radius: 5px;
+    }
+</style>
 </head>
 <body>
     <div class="container">
-    <form action="" method="POST" name="form_pay">
-        <?php
+        <form action="" method="POST" name="form_pay">
+            <?php
             foreach ($message as $key => $value) {
                 if(is_array($value)){
                     foreach ($value as $key1 => $value1) {
                         foreach ($value1 as $key2 => $value2) {
                             ?>
-                                <input required type="hidden" name="<?=$key?>[<?= $key1?>][<?= $key2?>]" value="<?= $value2?>">
+                            <input required type="hidden" name="<?=$key?>[<?= $key1?>][<?= $key2?>]" value="<?= $value2?>">
                             <?php
                         }
                     }
                 } else {
                     ?>
-                        <input type="hidden" name="<?= $key?>" id="<?= $key?>" value="<?= $value?>">
+                    <input type="hidden" name="<?= $key?>" id="<?= $key?>" value="<?= $value?>">
                     <?php
                 }
 
                 
             }
 
-        ?>
-      <div class="row">
-        <?php
             ?>
-                <ul class="nav nav-pills">
-            <?php
-            $urutan = 0;
-            foreach ($toolbar as $key => $group) {
-                ?>
-                    <li class="<?= $urutan == 0 ? 'active' : ''?>"><a data-toggle="pill" href="#<?=strtoupper($key)?>">
-                        <span><?=ucwords($key)?></span>
-                    </a></li>
+            <div class="row">
                 <?php
-                $urutan ++;
-            }
-            $urutan = 0;
-            ?>
+                ?>
+                <ul class="nav nav-pills">
+                    <?php
+                    $urutan = 0;
+                    foreach ($toolbar as $key => $group) {
+                        ?>
+                        <li class="<?= $urutan == 0 ? 'active' : ''?>"><a data-toggle="pill" href="#<?=strtoupper($key)?>">
+                            <span><?=ucwords($key)?></span>
+                        </a></li>
+                        <?php
+                        $urutan ++;
+                    }
+                    $urutan = 0;
+                    ?>
                 </ul>
                 <div class="tab-content">
-            <?php    
-            foreach ($toolbar as $key => $group) {
-                ?>  
-                    
-                    
+                    <?php    
+                    foreach ($toolbar as $key => $group) {
+                        ?>  
+                        
+                        
                         <div id="<?=strtoupper($key)?>" class="tab-pane fade <?= $urutan == 0 ? 'in active' : ''?>">
                             
                             <h4><?=ucwords($key)?></h4>
                             <?php
-                                foreach ($group as $row) {
-                                    ?>
-                                    <div class="text-center bordered">
-                                        <label>
+                            foreach ($group as $row) {
+                                ?>
+                                <div class="text-center bordered">
+                                    <label>
                                         <input type="radio" name="pay_url" value="<?= $row['payment_url']?>">
                                         <div class="spi-img">
                                             <img src="<?= $row['payment_logo']?>">
                                             <span><?= $row['payment_name']?></span>
                                         </div>
-                                        </label>
-                                    </div>
-                                    <?php
-                                }
+                                    </label>
+                                </div>
+                                <?php
+                            }
                             ?>
                         </div>
-                    
+                        
 
-                    
-                <?php
-                $urutan++;
-            }
-            ?>
+                        
+                        <?php
+                        $urutan++;
+                    }
+                    ?>
                 </div>
-            <?php
-        ?>
-        <div class="col-sm-12">
-          <button type="submit" class="btn btn-danger bayar">BAYAR</button>
-        </div>
+                <?php
+                ?>
+                <div class="col-sm-12">
+                  <button type="submit" class="btn btn-danger bayar">BAYAR</button>
+              </div>
 
 
-        <?php
-            if(count($_POST) > 1){
+              <?php
+              if(count($_POST) > 1){
                 ?>
                 <div class="col-sm-12">
                     <h1>Response</h1>
@@ -193,11 +199,11 @@ $message = $message->getMessage();
                 </div>
                 <?php
             }
-        ?>
+            ?>
 
-      </div>
+        </div>
     </form>
-    </div>
+</div>
 </body>
 <script>
     var rad = document.form_pay.pay_url;
