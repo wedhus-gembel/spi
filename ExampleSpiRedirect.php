@@ -81,14 +81,24 @@ $message = $message->getMessage();
             font-weight: bold;
         }
         .bordered {
-            border: 2px solid #337ab7;
-            border-radius: 15px;
             padding: 10px;
             min-height: 125px;
             margin-bottom: 5px;
+            border: 1px solid #e6e1e1;
+            display: inline-flex;
+            border-radius: 7px;
         }
-        .spi-img label {
+        .spi-img span {
             display: block;
+        }
+        .bordered.active {
+            background: #0094dc;
+            color: #fff;
+        }
+        .bordered.active img {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -144,12 +154,14 @@ $message = $message->getMessage();
                             <?php
                                 foreach ($group as $row) {
                                     ?>
-                                    <div class="col-sm-2 text-center bordered">
+                                    <div class="text-center bordered">
+                                        <label>
                                         <input type="radio" name="pay_url" value="<?= $row['payment_url']?>">
                                         <div class="spi-img">
                                             <img src="<?= $row['payment_logo']?>">
-                                            <label><?= $row['payment_name']?></label>
+                                            <span><?= $row['payment_name']?></span>
                                         </div>
+                                        </label>
                                     </div>
                                     <?php
                                 }
@@ -192,10 +204,12 @@ $message = $message->getMessage();
     var prev = null;
     for(var i = 0; i < rad.length; i++) {
         rad[i].onclick = function() {
+            (prev) ? prev.parentElement.parentElement.classList.remove("active") : null;
             if(this !== prev) {
                 prev = this;
             }
             document.form_pay.action = this.value;
+            this.parentElement.parentElement.classList.add("active");
         };
     }
 </script>
