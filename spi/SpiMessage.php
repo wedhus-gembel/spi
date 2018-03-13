@@ -54,6 +54,7 @@ class SpiMessage {
         "custom_header" => "",
         "custom_logo" => "",
         "custom_name" => "",
+        "skip_spi_page" => "0",
     );
 
     const _spi_item_name = "name";

@@ -2,13 +2,15 @@
 
 require_once "spi/Spi.php";
 require_once "spi/SpiMessage.php";
+require_once "spi/SpiHelper.php";
 
-$username = 'plasamall';
-$password = 'plasamall';
 
+define("MERCHANT_KEY", "39c9e05920f663956bc8c30eb5eeea1f0704ee98");
+define("PRIVATE_KEY1", "plasamall");
+define("PRIVATE_KEY2", "plasamall");
 
 $Spi = new Spi();
-$Spi->setPrivateKey($username, $password);
+$Spi->setPrivateKey(PRIVATE_KEY1, PRIVATE_KEY2);
 $result = $Spi->getToolbar();
 $toolbar = json_decode($result, TRUE);
 $toolbar = isset($toolbar["products"]) ? $toolbar["products"] : array();
@@ -20,7 +22,7 @@ $message->set_item('spi_callback', 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQ
 $message->set_item('spi_currency', 'IDR');
 $message->set_item('spi_item_description', 'Baju Tidur');
 $message->set_item('spi_price', 30000);
-$message->set_item('spi_token', $username.$password);
+$message->set_item('spi_token', PRIVATE_KEY1.PRIVATE_KEY2);
 $message->set_item('spi_quantity', 3);
 $message->set_item('spi_is_escrow', 0);
 $message->set_item('spi_amount', 50000);
@@ -46,6 +48,13 @@ $item2 = array(
     'desc' => 'Baju Olahraga',
 );
 $message->set_item(1, $item2, 'spi_item');
+
+// set 1 to skip every page(exclude pages that have mandatory input) in SPI
+$message->set_item('skip_spi_page', 0);
+
+// for SPI Redirect, spi_signature must be defined
+$spi_signature = SpiHelper::generateSpiSignature(MERCHANT_KEY, $message->getMessage());
+$message->set_item('spi_signature', $spi_signature);
 $message = $message->getMessage();
 
 ?>
@@ -152,10 +161,10 @@ $message = $message->getMessage();
                     <?php    
                     foreach ($toolbar as $key => $group) {
                         ?>  
-                        
-                        
+
+
                         <div id="<?=strtoupper($key)?>" class="tab-pane fade <?= $urutan == 0 ? 'in active' : ''?>">
-                            
+
                             <h4><?=ucwords($key)?></h4>
                             <?php
                             foreach ($group as $row) {
@@ -173,9 +182,9 @@ $message = $message->getMessage();
                             }
                             ?>
                         </div>
-                        
 
-                        
+
+
                         <?php
                         $urutan++;
                     }
@@ -193,6 +202,30 @@ $message = $message->getMessage();
                 ?>
                 <div class="col-sm-12">
                     <h1>Response</h1>
+                    <?php
+                        $spi_token = PRIVATE_KEY1.PRIVATE_KEY2;
+                        $spi_merchant_transaction_reff = isset($_POST["order_id"]) ? $_POST["order_id"] : "";
+                        $response_code = isset($_POST["response_code"]) ? $_POST["response_code"] : "";
+                        $spi_signature = SpiHelper::generateSpiSignatureResponse(MERCHANT_KEY, $spi_token, $spi_merchant_transaction_reff, $response_code);
+                        $signature_response = isset($_POST["spi_signature"]) ? $_POST["spi_signature"] : "";
+
+                        if($spi_signature == $signature_response){
+                            ?>
+                                <div class="alert alert-success text-center">
+                                    <h2>VERIFIED</h2>
+                                    <h3>Valid Signature</h3>
+                                </div>
+                            <?php
+                        } else {
+                            ?>
+                                <div class="alert alert-danger text-center">
+                                    <h2>UNVERIFIED</h2>
+                                    <h3>Invalid Signature</h3>
+                                </div>
+                            <?php
+                        }
+
+                    ?>
                     <pre>
                         <?php print_r($_POST);?>        
                     </pre>

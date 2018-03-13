@@ -71,6 +71,7 @@ class Spi {
 
 }
 
+
 class SCApiConstant {
     const SPI_URL = "https://smartcash.co.id/spi";
     const PATH_TOKEN = "/token";

@@ -61,4 +61,36 @@ Class SpiHelper {
 	    return $output;
 	}
 
+	public static function generateSpiSignature($merchant_key = "", $message = array()){
+        $spi_token = isset($message["spi_token"]) ? $message["spi_token"] : "";
+        $spi_merchant_transaction_reff = isset($message["spi_merchant_transaction_reff"]) ? $message["spi_merchant_transaction_reff"] : "";
+        $spi_amount = isset($message["spi_amount"]) ? $message["spi_amount"] : "0";
+        $spi_expedition_price = isset($message["spi_expedition_price"]) ? $message["spi_expedition_price"] : "0";
+        $spi_merchant_discount = isset($message["spi_merchant_discount"]) ? $message["spi_merchant_discount"] : "0";
+        
+        $spi_amount = number_format(doubleval($spi_amount),2,".","");
+        $spi_expedition_price = number_format(doubleval($spi_expedition_price),2,".","");
+        $spi_merchant_discount = number_format(doubleval($spi_merchant_discount),2,".","");
+        
+        $signature = strtoupper(sha1(
+                $spi_token . '|' . 
+                $merchant_key . '|' . 
+                $spi_merchant_transaction_reff . '|' .
+                $spi_amount . '|' . 
+                $spi_expedition_price . '|'. 
+                $spi_merchant_discount
+                ));
+        return $signature;
+	}
+
+
+	public static function generateSpiSignatureResponse($merchant_key = "", $spi_token = "", $spi_merchant_transaction_reff, $response_code){
+	    $spi_signature = strtoupper(sha1(
+	            $spi_token . '|' . 
+	            $merchant_key . '|' . 
+	            $spi_merchant_transaction_reff . '|' .
+	            $response_code
+	            ));
+	    return $spi_signature;
+	}
 }

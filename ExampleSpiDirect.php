@@ -3,14 +3,12 @@
 require_once "spi/SpiDirectPayment.php";
 require_once "spi/SpiMessage.php";
 
-
-$username = 'plasamall';
-$password = 'plasamall';
-
+define("PRIVATE_KEY1", "plasamall");
+define("PRIVATE_KEY2", "plasamall");
 
 $Spi = new SpiDirectPayment();
 // set your private key
-$Spi->setPrivateKey($username, $password);
+$Spi->setPrivateKey(PRIVATE_KEY1, PRIVATE_KEY2);
 
 // You can set directly from JSON string
 $message = '{
