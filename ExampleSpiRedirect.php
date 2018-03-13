@@ -11,10 +11,14 @@ define("PRIVATE_KEY2", "plasamall");
 
 $Spi = new Spi();
 $Spi->setPrivateKey(PRIVATE_KEY1, PRIVATE_KEY2);
+
+// get toolbar
 $result = $Spi->getToolbar();
 $toolbar = json_decode($result, TRUE);
 $toolbar = isset($toolbar["products"]) ? $toolbar["products"] : array();
 
+
+// generate message
 $message = new SpiMessage();
 $message->set_item('cms', 'API');
 $message->set_item('url_listener', 'http://www.yourwebstore.com/url_listener.php');
