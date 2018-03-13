@@ -144,7 +144,7 @@ $message = $message->getMessage();
                             <?php
                                 foreach ($group as $row) {
                                     ?>
-                                    <div class="col-sm-3 text-center bordered">
+                                    <div class="col-sm-2 text-center bordered">
                                         <input type="radio" name="pay_url" value="<?= $row['payment_url']?>">
                                         <div class="spi-img">
                                             <img src="<?= $row['payment_logo']?>">
