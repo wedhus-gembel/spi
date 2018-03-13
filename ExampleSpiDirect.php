@@ -34,15 +34,12 @@ $message = '{
         "produkToken": "",
         "totalPrice": 10000
     }],
-    "spi_item_description": "Baju Tidur",
-    "spi_price": 30000,
-    "spi_quantity": 3,
     "spi_is_escrow": "0",
     "spi_amount": 50000,
     "spi_merchant_transaction_reff": "'.uniqid().'",
     "spi_item_expedition": "0",
-    "spi_billingPhone": "081234567",
-    "spi_billingEmail": "ry4nn4nd4@gmail.com",
+    "spi_billingPhone": "085649605912",
+    "spi_billingEmail": "zainulalim@gmail.com",
     "spi_billingName": "Pembeli Baju",
     "spi_paymentDate": "'.date('YmdHis', strtotime(date('YmdHis') . ' + 1 hours')).'",
 }';
@@ -52,11 +49,7 @@ $message = new SpiMessage();
 $message->set_item('cms', 'API_DIRECT');
 $message->set_item('url_listener', 'http://www.yourwebstore.com/url_listener.php');
 $message->set_item('spi_currency', 'IDR');
-$message->set_item('spi_item_description', 'Baju Tidur');
-$message->set_item('spi_price', 30000);
-$message->set_item('spi_quantity', 3);
 $message->set_item('spi_is_escrow', 0);
-$message->set_item('spi_amount', 50000);
 $message->set_item('spi_merchant_transaction_reff', uniqid());
 $message->set_item('spi_item_expedition', 0);
 $message->set_item('spi_billingPhone', '081234567777');
@@ -79,6 +72,8 @@ $item2 = array(
     'desc' => 'Baju Olahraga',
 );
 $message->set_item(1, $item2, 'spi_item');
+$message->set_item('spi_amount', 50000);
+
 // get json message
 $message = $message->getJson();
 // using encryption, 1 => Mcrypt, 2 => OpenSSL

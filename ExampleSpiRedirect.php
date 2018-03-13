@@ -20,14 +20,20 @@ $message->set_item('cms', 'API');
 $message->set_item('url_listener', 'http://www.yourwebstore.com/url_listener.php');
 $message->set_item('spi_callback', 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 $message->set_item('spi_currency', 'IDR');
+
+// for one item, you can set non-array
+/**
 $message->set_item('spi_item_description', 'Baju Tidur');
-$message->set_item('spi_price', 30000);
-$message->set_item('spi_token', PRIVATE_KEY1.PRIVATE_KEY2);
-$message->set_item('spi_quantity', 3);
-$message->set_item('spi_is_escrow', 0);
-$message->set_item('spi_amount', 50000);
-$message->set_item('spi_merchant_transaction_reff', uniqid());
+$message->set_item('spi_price', 25000);
+$message->set_item('spi_quantity', 2);
+**/
+
+// not mandatory
 $message->set_item('spi_item_expedition', 0);
+
+$message->set_item('spi_token', PRIVATE_KEY1.PRIVATE_KEY2);
+$message->set_item('spi_is_escrow', 0);
+$message->set_item('spi_merchant_transaction_reff', uniqid());
 $message->set_item('spi_billingPhone', '081234567777');
 $message->set_item('spi_billingEmail', 'zainulalim@gmail.com');
 $message->set_item('spi_billingName', 'Zainul Alim');
@@ -48,6 +54,8 @@ $item2 = array(
     'desc' => 'Baju Olahraga',
 );
 $message->set_item(1, $item2, 'spi_item');
+// total amount
+$message->set_item('spi_amount', 50000);
 
 // set 1 to skip every page(exclude pages that have mandatory input) in SPI
 $message->set_item('skip_spi_page', 0);
