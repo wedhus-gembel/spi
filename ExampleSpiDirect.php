@@ -6,6 +6,8 @@ require_once "spi/SpiMessage.php";
 define("PRIVATE_KEY1", "plasamall");
 define("PRIVATE_KEY2", "plasamall");
 
+$id_produk = isset($_GET["id_produk"]) ? $_GET["id_produk"] : "indomaret";
+
 $Spi = new SpiDirectPayment();
 // set your private key
 $Spi->setPrivateKey(PRIVATE_KEY1, PRIVATE_KEY2);
@@ -81,7 +83,7 @@ $Spi->setEncryptMethod(1);
 // set encrypted message
 $Spi->setMessageFromJson($message);
 // set payment method, 
-$Spi->setPaymentMethod("indomaret");
+$Spi->setPaymentMethod($id_produk);
 /**
 * List of products:
 finpay_code => Finnet Payment Code
