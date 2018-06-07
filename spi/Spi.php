@@ -10,7 +10,7 @@ class Spi {
 	
 	var $PRIVATE_KEY1 = "";
 	var $PRIVATE_KEY2 = "";
-	
+	var $IS_DEVEL = false;
 	var $DOMAIN_URL = "";
 
     public function __construct() {
@@ -22,6 +22,9 @@ class Spi {
     	$this->PRIVATE_KEY2 = $pk2;
     }
 
+    public function isDevel($is_devel = false){
+        $this->IS_DEVEL = $is_devel;
+    }
 
     public function getToolbar(){
         $params = array(
@@ -38,8 +41,8 @@ class Spi {
         if (is_array($content)) {
             $content = http_build_query($content);
         }
-        
-        $result = file_get_contents(SCApiConstant::SPI_URL . $path . "?" . $content, false, $this->createContext("GET", $content, true, $content_type));
+        $URL = $this->IS_DEVEL ? SCApiConstant::SPI_URL_DEVEL : SCApiConstant::SPI_URL;
+        $result = file_get_contents($URL . $path . "?" . $content, false, $this->createContext("GET", $content, true, $content_type));
         return $result;
     }
 
@@ -47,8 +50,8 @@ class Spi {
         if (is_array($content) && $content_type == SCApiContentType::JSON) {
             $content = json_encode($content);
         }
-
-        $result = file_get_contents(SCApiConstant::SPI_URL . $path, false, $this->createContext("POST", $content, true, $content_type));
+        $URL = $this->IS_DEVEL ? SCApiConstant::SPI_URL_DEVEL : SCApiConstant::SPI_URL;
+        $result = file_get_contents($URL . $path, false, $this->createContext("POST", $content, true, $content_type));
         return $result;
     }
 
@@ -73,7 +76,8 @@ class Spi {
 
 
 class SCApiConstant {
-    const SPI_URL = "https://smartcash.co.id/spi";
+    const SPI_URL = "https://www.speedcash.co.id/spi";
+    const SPI_URL_DEVEL = "https://www.smartcash.co.id/spi";
     const PATH_TOKEN = "/token";
     const PATH_API = "/api";
     const PATH_API2 = "/apiv2";
