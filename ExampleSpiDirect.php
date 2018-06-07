@@ -9,6 +9,7 @@ define("PRIVATE_KEY2", "plasamall");
 $id_produk = isset($_GET["id_produk"]) ? $_GET["id_produk"] : "indomaret";
 
 $Spi = new SpiDirectPayment();
+$Spi->isDevel(true);
 // set your private key
 $Spi->setPrivateKey(PRIVATE_KEY1, PRIVATE_KEY2);
 

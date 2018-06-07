@@ -6,10 +6,11 @@ require_once "spi/SpiHelper.php";
 
 
 define("MERCHANT_KEY", "39c9e05920f663956bc8c30eb5eeea1f0704ee98");
-define("PRIVATE_KEY1", "plasamall");
-define("PRIVATE_KEY2", "plasamall");
+define("PRIVATE_KEY1", "4a77ed8d7f73c2450479efdaba9e4d90");
+define("PRIVATE_KEY2", "3c5622721d650b61f533bd24fc53668a");
 
 $Spi = new Spi();
+$Spi->isDevel(true);
 $Spi->setPrivateKey(PRIVATE_KEY1, PRIVATE_KEY2);
 
 // get toolbar
@@ -24,15 +25,6 @@ $message->set_item('cms', 'API');
 $message->set_item('url_listener', 'http://www.yourwebstore.com/url_listener.php');
 $message->set_item('spi_callback', 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 $message->set_item('spi_currency', 'IDR');
-
-// for one item, you can set non-array
-/**
-$message->set_item('spi_item_description', 'Baju Tidur');
-$message->set_item('spi_price', 25000);
-$message->set_item('spi_quantity', 2);
-**/
-
-// not mandatory
 $message->set_item('spi_item_expedition', 0);
 
 $message->set_item('spi_token', PRIVATE_KEY1.PRIVATE_KEY2);
@@ -67,7 +59,10 @@ $message->set_item('skip_spi_page', 0);
 // for SPI Redirect, spi_signature must be defined
 $spi_signature = SpiHelper::generateSpiSignature(MERCHANT_KEY, $message->getMessage());
 $message->set_item('spi_signature', $spi_signature);
+$message->set_item('get_link', "yes");
+$message->set_item('payment_via', "SSN");
 $message = $message->getMessage();
+
 
 ?>
 
@@ -130,28 +125,48 @@ $message = $message->getMessage();
 </style>
 </head>
 <body>
+    <form action="" method="POST" name="form_pay">
     <div class="container">
-        <form action="" method="POST" name="form_pay">
-            <?php
-            foreach ($message as $key => $value) {
-                if(is_array($value)){
-                    foreach ($value as $key1 => $value1) {
-                        foreach ($value1 as $key2 => $value2) {
+        
+            <div class="row">
+                <?php
+                    foreach ($message as $key => $value) {
+                        if(is_array($value)){
+                            foreach ($value as $key1 => $value1) {
+                                foreach ($value1 as $key2 => $value2) {
+                                    ?>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="<?= $key?>"><?=$key?>[<?= $key1?>][<?= $key2?>]</label>
+                                            <input type="text" class="form-control" name="<?=$key?>[<?= $key1?>][<?= $key2?>]" value="<?= $value2?>">
+                                          </div>
+                                          
+                                    </div>
+                                    <?php
+                                }
+                            }
+                        } else {
                             ?>
-                            <input required type="hidden" name="<?=$key?>[<?= $key1?>][<?= $key2?>]" value="<?= $value2?>">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="<?= $key?>"><?= ucwords($key)?></label>
+                                    <input type="text" class="form-control" name="<?= $key?>" value="<?= $value?>">
+                                  </div>
+                                  
+                            </div>
+                            
                             <?php
                         }
+
+                        
                     }
-                } else {
+
                     ?>
-                    <input type="hidden" name="<?= $key?>" id="<?= $key?>" value="<?= $value?>">
-                    <?php
-                }
-
                 
-            }
-
-            ?>
+            </div>
+    </div>
+    <div class="container">
+            
             <div class="row">
                 <?php
                 ?>
@@ -247,8 +262,9 @@ $message = $message->getMessage();
             ?>
 
         </div>
-    </form>
+    
 </div>
+</form>
 </body>
 <script>
     var rad = document.form_pay.pay_url;
