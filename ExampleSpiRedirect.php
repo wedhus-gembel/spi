@@ -1,26 +1,26 @@
 <?php
 
-require_once "wpi/Wpi.php";
-require_once "wpi/WpiMessage.php";
-require_once "wpi/WpiHelper.php";
+require_once "spi/Spi.php";
+require_once "spi/SpiMessage.php";
+require_once "spi/SpiHelper.php";
 
 
 define("MERCHANT_KEY", "39c9e05920f663956bc8c30eb5eeea1f0704ee98");
 define("PRIVATE_KEY1", "4a77ed8d7f73c2450479efdaba9e4d90");
 define("PRIVATE_KEY2", "3c5622721d650b61f533bd24fc53668a");
 
-$Wpi = new Wpi();
-$Wpi->isDevel(true);
-$Wpi->setPrivateKey(PRIVATE_KEY1, PRIVATE_KEY2);
+$Spi = new Spi();
+$Spi->isDevel(true);
+$Spi->setPrivateKey(PRIVATE_KEY1, PRIVATE_KEY2);
 
 // get toolbar
-$result = $Wpi->getToolbar();
+$result = $Spi->getToolbar();
 $toolbar = json_decode($result, TRUE);
 $toolbar = isset($toolbar["products"]) ? $toolbar["products"] : array();
 
 
 // generate message
-$message = new WpiMessage();
+$message = new SpiMessage();
 $message->set_item('cms', 'API');
 $message->set_item('url_listener', 'http://www.yourwebstore.com/url_listener.php');
 $message->set_item('spi_callback', 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
@@ -57,7 +57,7 @@ $message->set_item('spi_amount', 50000);
 $message->set_item('skip_spi_page', 0);
 
 // for SPI Redirect, spi_signature must be defined
-$spi_signature = WpiHelper::generateWpiSignature(MERCHANT_KEY, $message->getMessage());
+$spi_signature = SpiHelper::generateSpiSignature(MERCHANT_KEY, $message->getMessage());
 $message->set_item('spi_signature', $spi_signature);
 $message->set_item('get_link', "yes");
 $message->set_item('payment_via', "SSN");
@@ -233,7 +233,7 @@ $message = $message->getMessage();
                         $spi_token = PRIVATE_KEY1.PRIVATE_KEY2;
                         $spi_merchant_transaction_reff = isset($_POST["order_id"]) ? $_POST["order_id"] : "";
                         $response_code = isset($_POST["response_code"]) ? $_POST["response_code"] : "";
-                        $spi_signature = WpiHelper::generateWpiSignatureResponse(MERCHANT_KEY, $spi_token, $spi_merchant_transaction_reff, $response_code);
+                        $spi_signature = SpiHelper::generateSpiSignatureResponse(MERCHANT_KEY, $spi_token, $spi_merchant_transaction_reff, $response_code);
                         $signature_response = isset($_POST["spi_signature"]) ? $_POST["spi_signature"] : "";
 
                         if($spi_signature == $signature_response){

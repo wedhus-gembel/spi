@@ -1,17 +1,17 @@
 <?php
 
-require_once "wpi/WpiDirectPayment.php";
-require_once "wpi/WpiMessage.php";
+require_once "spi/SpiDirectPayment.php";
+require_once "spi/SpiMessage.php";
 
 define("PRIVATE_KEY1", "plasamall");
 define("PRIVATE_KEY2", "plasamall");
 
 $id_produk = isset($_GET["id_produk"]) ? $_GET["id_produk"] : "indomaret";
 
-$Wpi = new WpiDirectPayment();
-$Wpi->isDevel(true);
+$Spi = new SpiDirectPayment();
+$Spi->isDevel(true);
 // set your private key
-$Wpi->setPrivateKey(PRIVATE_KEY1, PRIVATE_KEY2);
+$Spi->setPrivateKey(PRIVATE_KEY1, PRIVATE_KEY2);
 
 // You can set directly from JSON string
 $message = '{
@@ -48,7 +48,7 @@ $message = '{
 }';
 
 // or you can set manually each items in array
-$message = new WpiMessage();
+$message = new SpiMessage();
 $message->set_item('cms', 'API_DIRECT');
 $message->set_item('url_listener', 'http://www.yourwebstore.com/url_listener.php');
 $message->set_item('spi_currency', 'IDR');
@@ -80,11 +80,11 @@ $message->set_item('spi_amount', 50000);
 // get json message
 $message = $message->getJson();
 // using encryption, 1 => Mcrypt, 2 => OpenSSL
-$Wpi->setEncryptMethod(1);
+$Spi->setEncryptMethod(1);
 // set encrypted message
-$Wpi->setMessageFromJson($message);
+$Spi->setMessageFromJson($message);
 // set payment method, 
-$Wpi->setPaymentMethod($id_produk);
+$Spi->setPaymentMethod($id_produk);
 /**
 * List of products:
 finpay_code => Finnet Payment Code
@@ -100,5 +100,5 @@ indomaret   => Indomaret
 alfamart    => Alfamart
 **/
 
-$result = $Wpi->doPay();
+$result = $Spi->doPay();
 die($result);
