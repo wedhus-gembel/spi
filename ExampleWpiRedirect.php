@@ -59,8 +59,13 @@ $message->set_item('skip_spi_page', 0);
 // for SPI Redirect, spi_signature must be defined
 $spi_signature = WpiHelper::generateWpiSignature(MERCHANT_KEY, $message->getMessage());
 $message->set_item('spi_signature', $spi_signature);
-$message->set_item('get_link', "yes");
+
+
+// to get payment link, so client must post via background ie : CURL, so client will get LINK and client will be redirected to the LINK
+$message->set_item('get_link', "yes"); // fill yes for only get link
 $message->set_item('payment_via', "SSN");
+// ****** //
+
 $message = $message->getMessage();
 
 
