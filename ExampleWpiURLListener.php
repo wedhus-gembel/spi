@@ -1,16 +1,16 @@
 <?php
 
 $res_success = "ACCEPTED"; // please always use this response if your system flag success 
-$res_no_success = "NOK"; // use another response except "ACCEPTED" if your system flag not success, SPI will retry 3x until get response "ACCEPTED" 
+$res_no_success = "NOK"; // use another response except "ACCEPTED" if your system flag not success, WPI will retry 3x until get response "ACCEPTED" 
 
 
 /**
 Example of JSON String :
 {
-    "id_transaksi": "5757636", // Trx ID from SPI
+    "id_transaksi": "5757636", // Trx ID from WPI
     "no_reff": "7891092505", // Reff ID from Merchant, you will use this param for flagging
     "response_code": "00",
-    "id_produk": "SCPIMNDRCP", // Product ID from SPI
+    "id_produk": "SCPIMNDRCP", // Product ID from WPI
     "method_code": "MANDIRICP", // Payment Method
     "keterangan": "Transaksi anda berhasil"
 }
@@ -23,7 +23,8 @@ Example Response Code :
 31 : Gagal Catat Transaksi
 **/
 
-// SPI will request with POST and request body [JSON format]
+
+// WPI will request with POST and request body [JSON format]
 $json_string = file_get_contents('php://input'); // this is example for grabbing json, you can use another method
 
 $json_array = json_decode($json_string, TRUE);
