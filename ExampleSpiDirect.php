@@ -3,8 +3,8 @@
 require_once "spi/SpiDirectPayment.php";
 require_once "spi/SpiMessage.php";
 
-define("PRIVATE_KEY1", "plasamall");
-define("PRIVATE_KEY2", "plasamall");
+define("PRIVATE_KEY1", "");
+define("PRIVATE_KEY2", "");
 
 $id_produk = isset($_GET["id_produk"]) ? $_GET["id_produk"] : "indomaret";
 
