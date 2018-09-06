@@ -3,8 +3,9 @@
 require_once "wpi/WpiDirectPayment.php";
 require_once "wpi/WpiMessage.php";
 
-define("PRIVATE_KEY1", "plasamall");
-define("PRIVATE_KEY2", "plasamall");
+define("MERCHANT_KEY", "39c9e05920f663956bc8c30eb5eeea1f0704ee98");
+define("PRIVATE_KEY1", "4a77ed8d7f73c2450479efdaba9e4d90");
+define("PRIVATE_KEY2", "3c5622721d650b61f533bd24fc53668a");
 
 $id_produk = isset($_GET["id_produk"]) ? $_GET["id_produk"] : "indomaret";
 
