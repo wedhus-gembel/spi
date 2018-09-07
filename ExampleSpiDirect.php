@@ -14,6 +14,7 @@ $Spi->isDevel(true);
 // set your private key
 $Spi->setPrivateKey(PRIVATE_KEY1, PRIVATE_KEY2);
 
+
 // You can set directly from JSON string
 $message = '{
     "cms": "API_DIRECT",
